@@ -20,7 +20,7 @@ package ooo.oxo.apps.materialize;
 
 import android.app.Application;
 
-import com.umeng.analytics.MobclickAgent;
+//import com.umeng.analytics.MobclickAgent;
 
 import java.util.HashMap;
 
@@ -32,7 +32,7 @@ public class MaterializeApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        MobclickAgent.setCatchUncaughtExceptions(false);
+        //MobclickAgent.setCatchUncaughtExceptions(false);
 
         if (BuildConfig.FIR_ENABLED) {
             FIR.init(this);
@@ -42,7 +42,7 @@ public class MaterializeApplication extends Application {
 
         HashMap<String, String> event = new HashMap<>();
         event.put("launcher", MaterializeSharedState.getInstance().getLauncher());
-        MobclickAgent.onEvent(this, "launcher", event);
+        //MobclickAgent.onEvent(this, "launcher", event);
     }
 
 }

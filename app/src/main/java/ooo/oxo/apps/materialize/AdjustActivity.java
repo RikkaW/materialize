@@ -33,7 +33,7 @@ import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.umeng.analytics.MobclickAgent;
+//import com.umeng.analytics.MobclickAgent;
 
 import java.util.HashMap;
 
@@ -134,7 +134,7 @@ public class AdjustActivity extends RxAppCompatActivity {
                         LauncherUtil.saveIconFile(this, binding.getApp().label, result);
                     }
 
-                    MobclickAgent.onEvent(this, "compose", makeEvent());
+                    //MobclickAgent.onEvent(this, "compose", makeEvent());
 
                     setResult(RESULT_OK);
                     supportFinishAfterTransition();
@@ -144,13 +144,13 @@ public class AdjustActivity extends RxAppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+        //MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+        //MobclickAgent.onPause(this);
     }
 
     private HashMap<String, String> makeEvent() {

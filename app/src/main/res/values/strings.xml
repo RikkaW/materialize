@@ -24,9 +24,11 @@
     <string name="search">Search</string>
     <string name="search_hint">Search for app…</string>
 
+    <string name="save_file">Save icon file</string>
     <string name="about">About</string>
+
     <string name="version" formatted="false">Version %s (%s)</string>
-    <string name="fork_me_on_github">Fork me on GitHub</string>
+    <string name="fork_me_on_github">Fork Materialize on GitHub</string>
     <string name="libraries_used">Libraries used</string>
 
     <string name="update_available">New version %s is available</string>
@@ -45,12 +47,11 @@
 
     <string name="adjust_ok">Add to home screen</string>
     <string name="adjust_cancel">Cancel</string>
+    <string name="adjust_save_file">Save to SD card</string>
 
     <string name="fail_stencil">Failed to load stencils</string>
     <string name="done">Icon is added to your home screen</string>
 
-    <string name="save_file">Save icon file</string>
-    <string name="adjust_save_file">Save to SD card</string>
     <string name="done_save_file" formatted="false">Icon saved %s</string>
 
 </resources>

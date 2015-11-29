@@ -32,7 +32,7 @@ import android.view.MenuItem;
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-import com.umeng.analytics.MobclickAgent;
+//import com.umeng.analytics.MobclickAgent;
 
 import ooo.oxo.apps.materialize.databinding.MainActivityBinding;
 import ooo.oxo.apps.materialize.util.UpdateUtil;
@@ -107,17 +107,17 @@ public class MainActivity extends RxAppCompatActivity
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+        //MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
-    }
+        //MobclickAgent.onPause(this);
+    }*/
 
 
     @Override

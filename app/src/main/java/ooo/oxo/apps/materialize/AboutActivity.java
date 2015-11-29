@@ -28,6 +28,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import javax.xml.transform.Source;
+
 import ooo.oxo.apps.materialize.databinding.AboutActivityBinding;
 import ooo.oxo.apps.materialize.databinding.AboutHeaderBinding;
 import ooo.oxo.apps.materialize.databinding.AboutLibraryItemBinding;
@@ -36,6 +40,8 @@ import ooo.oxo.library.databinding.support.widget.BindingRecyclerView;
 public class AboutActivity extends AppCompatActivity {
 
     private final ArrayMap<String, String> libraries = new ArrayMap<>();
+    private final ArrayList<String> source = new ArrayList<>();
+    private final ArrayList<String> source_link = new ArrayList<>();
 
     @Override
     @SuppressWarnings("SpellCheckingInspection")
@@ -45,6 +51,11 @@ public class AboutActivity extends AppCompatActivity {
         AboutActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.about_activity);
 
         binding.toolbar.setNavigationOnClickListener(v -> supportFinishAfterTransition());
+
+        source.add("oxoooo / materialize");
+        source_link.add("https://github.com/oxoooo/materialize");
+        source.add("RikkaW / materialize");
+        source_link.add("https://github.com/RikkaW/materialize");
 
         libraries.put("romannurik / AndroidAssetStudio", "https://github.com/romannurik/AndroidAssetStudio");
 
@@ -77,29 +88,29 @@ public class AboutActivity extends AppCompatActivity {
                         : R.string.libraries_used);
             } else {
                 ItemViewHolder itemHolder = (ItemViewHolder) holder;
-                if (position == 1) {
-                    itemHolder.binding.setName("oxoooo / materialize");
+                if (position / 2 < source.size()) {
+                    itemHolder.binding.setName(source.get(position / 2));
                 } else {
-                    itemHolder.binding.setName(libraries.keyAt(position - 3));
+                    itemHolder.binding.setName(libraries.keyAt(position - 4));
                 }
             }
         }
 
         @Override
         public int getItemViewType(int position) {
-            return position == 0 || position == 2 ? 0 : 1;
-        }
+            return (position == 0 || position == 3) ? 0 : 1;
+    }
 
         @Override
         public int getItemCount() {
-            return libraries.size() + 3;
+            return libraries.size() + source.size() + 2;
         }
 
         private void handleItemClick(int position) {
-            if (position == 1) {
-                open("https://github.com/oxoooo/materialize");
+            if (position <= 2) {
+                open(source_link.get(position - 1));
             } else {
-                open(libraries.valueAt(position - 3));
+                open(libraries.valueAt(position - 4));
             }
         }
 
