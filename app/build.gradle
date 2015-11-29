@@ -24,7 +24,7 @@ android {
     buildToolsVersion '23.0.2'
 
     defaultConfig {
-        applicationId "ooo.oxo.apps.materialize"
+        applicationId "com.github.modify.materialize"
 
         minSdkVersion 15
 

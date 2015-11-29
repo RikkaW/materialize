@@ -18,7 +18,7 @@
 
 <resources>
 
-    <string name="app_name">Materialize</string>
+    <string name="app_name">Materialize(RikkaW modify)</string>
     <string name="app_name_debug" translatable="false">Materialize (debug)</string>
 
     <string name="search">Search</string>
@@ -48,5 +48,9 @@
 
     <string name="fail_stencil">Failed to load stencils</string>
     <string name="done">Icon is added to your home screen</string>
+
+    <string name="save_file">Save icon file</string>
+    <string name="adjust_save_file">Save to SD card</string>
+    <string name="done_save_file" formatted="false">Icon saved %s</string>
 
 </resources>
