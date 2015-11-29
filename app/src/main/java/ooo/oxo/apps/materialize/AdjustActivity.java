@@ -18,13 +18,17 @@
 
 package ooo.oxo.apps.materialize;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -68,9 +72,17 @@ public class AdjustActivity extends RxAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         binding = DataBindingUtil.setContentView(this, R.layout.adjust_activity);
 
         binding.setAdjust(adjustment);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (!sharedPref.getBoolean("save_file", false))
+            binding.ok.setText(R.string.adjust_ok);
+        else
+            binding.ok.setText(R.string.adjust_save_file);
 
         binding.setTransparency(new TransparencyDrawable(
                 getResources(), R.dimen.transparency_grid_size));
@@ -109,10 +121,18 @@ public class AdjustActivity extends RxAppCompatActivity {
                 .flatMap(avoid -> renders)
                 .compose(bindToLifecycle())
                 .subscribe(result -> {
-                    LauncherUtil.installShortcut(this,
-                            binding.getApp().getIntent(), binding.getApp().label, result);
 
-                    Toast.makeText(this, R.string.done, Toast.LENGTH_SHORT).show();
+                    if (!sharedPref.getBoolean("save_file", false))
+                    {
+                        LauncherUtil.installShortcut(this,
+                                binding.getApp().getIntent(), binding.getApp().label, result);
+
+                        Toast.makeText(this, R.string.done, Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        LauncherUtil.saveIconFile(this, binding.getApp().label, result);
+                    }
 
                     MobclickAgent.onEvent(this, "compose", makeEvent());
 

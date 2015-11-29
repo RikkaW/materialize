@@ -18,9 +18,12 @@
 
 package ooo.oxo.apps.materialize;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.Menu;
@@ -116,9 +119,15 @@ public class MainActivity extends RxAppCompatActivity
         MobclickAgent.onPause(this);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        menu.findItem(R.id.save).setChecked(sharedPref.getBoolean("save_file", false));
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -127,6 +136,16 @@ public class MainActivity extends RxAppCompatActivity
         switch (item.getItemId()) {
             case R.id.about:
                 startActivity(new Intent(this, AboutActivity.class));
+                return true;
+            case R.id.save:
+                boolean checked = !item.isChecked();
+                item.setChecked(checked);
+
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("save_file", checked);
+                editor.commit();
+
                 return true;
             case R.id.search:
                 searchPanelController.open();
