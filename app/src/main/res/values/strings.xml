@@ -18,8 +18,8 @@
 
 <resources>
 
-    <string name="app_name">Materialize (RikkaW modify)</string>
-    <string name="app_name_debug" translatable="false">Materialize (debug)</string>
+    <string name="app_name">Materialize-mod</string>
+    <string name="app_name_debug" translatable="false">Materialize-mod (debug)</string>
 
     <string name="search">Search</string>
     <string name="search_hint">Search for app…</string>

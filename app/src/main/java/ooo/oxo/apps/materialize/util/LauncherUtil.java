@@ -28,17 +28,23 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 import ooo.oxo.apps.materialize.R;
 
 public class LauncherUtil {
-
     public static void saveIconFile(Activity act, String label, ComponentName component, Bitmap icon) {
+
+        FileOutputStream fileOutputStream = null;
+
         try {
             String path = Environment.getExternalStorageDirectory().toString();
             path += "/icons/";
@@ -58,17 +64,42 @@ public class LauncherUtil {
 
             file.createNewFile();
 
-            OutputStream fOut = new FileOutputStream(file);
-            icon.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fileOutputStream = new FileOutputStream(file);
+            icon.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
 
             Toast.makeText(act, String.format(act.getString(R.string.done_save_file), path), Toast.LENGTH_SHORT).show();
 
-            fOut.flush();
-            fOut.close();
 
-
+            saveComponentName(act, component);
 
         } catch (IOException e) {
+            e.printStackTrace();
+
+            Toast.makeText(act,e.toString(), Toast.LENGTH_SHORT).show();
+        } finally {
+            try {
+                if (fileOutputStream != null)
+                {
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public static void saveComponentName(Activity act, ComponentName component) {
+        String path = Environment.getExternalStorageDirectory().toString();
+        path += "/icons/appfilter.txt";
+
+        try {
+            FileWriter fw = new FileWriter(path ,true);
+            fw.write(String.format("    <item component=\"%s\" drawable=\"\" />\n", component.toString()));
+            fw.close();
+        } catch(IOException e)
+        {
             e.printStackTrace();
 
             Toast.makeText(act,e.toString(), Toast.LENGTH_SHORT).show();

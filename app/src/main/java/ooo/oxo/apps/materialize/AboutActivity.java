@@ -54,7 +54,7 @@ public class AboutActivity extends AppCompatActivity {
 
         source.add("oxoooo / materialize");
         source_link.add("https://github.com/oxoooo/materialize");
-        source.add("RikkaW / materialize");
+        source.add("RikkaW / materialize (materialize-mod)");
         source_link.add("https://github.com/RikkaW/materialize");
 
         libraries.put("romannurik / AndroidAssetStudio", "https://github.com/romannurik/AndroidAssetStudio");

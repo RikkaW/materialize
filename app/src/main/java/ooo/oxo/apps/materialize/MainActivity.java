@@ -35,7 +35,7 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 //import com.umeng.analytics.MobclickAgent;
 
 import ooo.oxo.apps.materialize.databinding.MainActivityBinding;
-import ooo.oxo.apps.materialize.util.UpdateUtil;
+//import ooo.oxo.apps.materialize.util.UpdateUtil;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -91,7 +91,7 @@ public class MainActivity extends RxAppCompatActivity
                 .doOnCompleted(() -> binding.apps.smoothScrollToPosition(0))
                 .subscribe(apps.data::addWithIndex);
 
-        UpdateUtil.checkForUpdateAndPrompt(this);
+        //UpdateUtil.checkForUpdateAndPrompt(this);
     }
 
     @Override

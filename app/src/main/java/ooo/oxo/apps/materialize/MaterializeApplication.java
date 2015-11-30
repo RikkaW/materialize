@@ -24,7 +24,7 @@ import android.app.Application;
 
 import java.util.HashMap;
 
-import im.fir.sdk.FIR;
+//import im.fir.sdk.FIR;
 
 public class MaterializeApplication extends Application {
 
@@ -34,9 +34,9 @@ public class MaterializeApplication extends Application {
 
         //MobclickAgent.setCatchUncaughtExceptions(false);
 
-        if (BuildConfig.FIR_ENABLED) {
+        /*if (BuildConfig.FIR_ENABLED) {
             FIR.init(this);
-        }
+        }*/
 
         MaterializeSharedState.init(this);
 

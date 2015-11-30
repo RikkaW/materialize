@@ -18,7 +18,7 @@
 
 <resources>
 
-    <string name="app_name">靓晒 (RikkaW 修改版)</string>
+    <string name="app_name">靓晒-mod</string>
 
     <string name="search">搜索</string>
     <string name="search_hint">搜索应用…</string>
