@@ -131,7 +131,7 @@ public class AdjustActivity extends RxAppCompatActivity {
                     }
                     else
                     {
-                        LauncherUtil.saveIconFile(this, binding.getApp().label, result);
+                        LauncherUtil.saveIconFile(this, binding.getApp().label, binding.getApp().component, result);
                     }
 
                     //MobclickAgent.onEvent(this, "compose", makeEvent());
