@@ -91,13 +91,13 @@ public class LauncherUtil {
         return result;
     }
 
-    public static void saveComponentName(String folder, ComponentName component) {
+    public static void saveComponentName(String folder, ComponentName component, String fileName) {
         String path = Environment.getExternalStorageDirectory().toString();
         path += folder + "/appfilter.txt";
 
         try {
             FileWriter fw = new FileWriter(path ,true);
-            fw.write(String.format("    <item component=\"%s\" drawable=\"\" />\n", component.toString()));
+            fw.write(String.format("    <item component=\"%s\" drawable=\"%s\" />\n", component.toString(), fileName));
             fw.close();
         } catch(IOException e)
         {

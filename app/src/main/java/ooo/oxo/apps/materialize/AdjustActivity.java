@@ -143,8 +143,10 @@ public class AdjustActivity extends RxAppCompatActivity {
                 .compose(bindToLifecycle())
                 .subscribe(result -> {
 
+                    boolean saveFile = sharedPref.getBoolean("pef_save_file", false);
+                    boolean saveUseAppName = sharedPref.getBoolean("pef_save_file_name", false);
 
-                    if (!sharedPref.getBoolean("pef_save_file", false))
+                    if (!saveFile)
                     {
                         LauncherUtil.installShortcut(this,
                                 binding.getApp().getIntent(), binding.getApp().label, result);
@@ -154,12 +156,19 @@ public class AdjustActivity extends RxAppCompatActivity {
                     else {
 
                         String folder = sharedPref.getString("pef_save_loc", "/icons");
+                        String fileName = binding.editText.getText().toString();
 
-                        String toast = LauncherUtil.saveIconFile(folder, binding.editText.getText().toString(), result);
+                        if (saveUseAppName)
+                            fileName = binding.getApp().label;
+
+                        String toast = LauncherUtil.saveIconFile(folder, fileName, result);
 
                         if (!toast.equals("")) {
                             if (sharedPref.getBoolean("pef_save_txt", false)) {
-                                LauncherUtil.saveComponentName(folder, binding.getApp().component);
+                                if (saveUseAppName)
+                                    fileName = "";
+
+                                LauncherUtil.saveComponentName(folder, binding.getApp().component, fileName);
                             }
 
                             Toast.makeText(this, String.format(getString(R.string.done_save_file), toast), Toast.LENGTH_SHORT).show();
