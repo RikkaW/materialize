@@ -76,15 +76,6 @@ public class AdjustActivity extends RxAppCompatActivity {
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (!sharedPref.getBoolean("pef_save_file", false)) {
-            binding.ok.setText(R.string.adjust_ok);
-            binding.tableRowEdit.setVisibility(View.GONE);
-        }
-        else {
-            binding.ok.setText(R.string.adjust_save_file);
-            binding.tableRowEdit.setVisibility(View.VISIBLE);
-        }
-
         ActivityInfo activityInfo = getIntent().getParcelableExtra("activity");
 
         if (sharedPref.getBoolean("pef_save_file_name", false)) {
@@ -100,6 +91,15 @@ public class AdjustActivity extends RxAppCompatActivity {
             else
                 binding.editText.setText(packageNameArray[packageNameArray.length]);
 
+            binding.tableRowEdit.setVisibility(View.VISIBLE);
+        }
+
+        if (!sharedPref.getBoolean("pef_save_file", false)) {
+            binding.ok.setText(R.string.adjust_ok);
+            binding.tableRowEdit.setVisibility(View.GONE);
+        }
+        else {
+            binding.ok.setText(R.string.adjust_save_file);
             binding.tableRowEdit.setVisibility(View.VISIBLE);
         }
 
