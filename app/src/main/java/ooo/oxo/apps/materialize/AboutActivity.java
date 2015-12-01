@@ -30,8 +30,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import javax.xml.transform.Source;
-
 import ooo.oxo.apps.materialize.databinding.AboutActivityBinding;
 import ooo.oxo.apps.materialize.databinding.AboutHeaderBinding;
 import ooo.oxo.apps.materialize.databinding.AboutLibraryItemBinding;

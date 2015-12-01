@@ -32,23 +32,37 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class LauncherUtil {
-    public static String saveIconFile(String name, ComponentName component, Bitmap icon) {
+    public static String saveIconFile(String folder, String name, Bitmap icon) {
         String result = "";
 
         FileOutputStream fileOutputStream = null;
 
-        try {
-            String path = Environment.getExternalStorageDirectory().toString();
-            path += "/icons/";
+        String path = Environment.getExternalStorageDirectory().toString();
+        path += folder + "/";
 
+        try {
+            String iconPath = path + "/.nomedia";
+
+            File file = new File(iconPath);
+
+            if (file.exists())
+                file.delete();
+
+            file.createNewFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
             File filePath = new File(path);
 
             if (!filePath.exists())
                 filePath.mkdir();
 
-            path += name + ".png";
+            String iconPath = path + name + ".png";
 
-            File file = new File(path);
+            File file = new File(iconPath);
 
             if (file.exists())
                 file.delete();
@@ -58,9 +72,7 @@ public class LauncherUtil {
             fileOutputStream = new FileOutputStream(file);
             icon.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
 
-            saveComponentName(component);
-
-            result = path;
+            result = iconPath;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,15 +86,14 @@ public class LauncherUtil {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
 
         return result;
     }
 
-    public static void saveComponentName(ComponentName component) {
+    public static void saveComponentName(String folder, ComponentName component) {
         String path = Environment.getExternalStorageDirectory().toString();
-        path += "/icons/appfilter.txt";
+        path += folder + "/appfilter.txt";
 
         try {
             FileWriter fw = new FileWriter(path ,true);

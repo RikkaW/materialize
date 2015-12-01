@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    android:layout="@layout/preference_item"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_widget_empty">
+
+        <SwitchPreference
+            android:key="pef_save_file"
+            android:layout="@layout/preference_item"
+            android:title="@string/settings_save_file"
+            android:summary="@string/settings_save_file_summary"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
+            android:key="pef_save_file_name"
+            android:layout="@layout/preference_item"
+            android:title="@string/settings_save_file_name"
+            android:summaryOn="@string/settings_save_file_name_summary_on"
+            android:summaryOff="@string/settings_save_file_name_summary_off"
+            android:defaultValue="false"
+            android:dependency="pef_save_file"/>
+
+        <ooo.oxo.apps.materialize.widget.EditTextPreferenceShowValue
+            android:key="pef_save_loc"
+            android:layout="@layout/preference_item"
+            android:title="@string/settings_save_location"
+            android:defaultValue= "/icons"
+            android:dependency="pef_save_file"/>
+
+        <SwitchPreference
+            android:key="pef_save_txt"
+            android:layout="@layout/preference_item"
+            android:title="@string/settings_save_txt"
+            android:summary="@string/settings_save_txt_summary"
+            android:defaultValue="true"
+            android:dependency="pef_save_file"/>
+
+        <!--<Preference
+            android:key="pef_clear"
+            android:layout="@layout/preference_item"
+            android:title="@string/settings_clear"
+            android:summary="@string/settings_clear_summary"/>-->
+
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Materialize - Materialize all those not material
   ~ Copyright (C) 2015  XiNGRZ <xxx@oxo.ooo>
   ~
@@ -14,18 +14,19 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ooo.oxo.apps.materialize">
 
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <!-- Used by Umeng and FIR -->
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    -->
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -37,7 +38,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--<meta-data
+        <!--
+        <meta-data
             android:name="UMENG_APPKEY"
             android:value="562ded5d67e58ea57c0026bb" />
 
@@ -53,22 +55,25 @@
             android:name="ooo.oxo.apps.materialize.io.DrawableGlideMode"
             android:value="GlideModule" />
 
-
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity android:name=".AboutActivity" />
-
         <activity
             android:name=".AdjustActivity"
             android:theme="@style/AdjustTheme" />
-
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ooo.oxo.apps.materialize.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

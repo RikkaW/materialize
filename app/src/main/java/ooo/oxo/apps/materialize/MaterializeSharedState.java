@@ -28,11 +28,11 @@ public class MaterializeSharedState {
     private static MaterializeSharedState instance;
 
     private final String launcher;
-    private final SharedPreferences sharedPref;
+    //private final SharedPreferences sharedPref;
 
     private MaterializeSharedState(Context context) {
         this.launcher = LauncherUtil.resolveLauncherApp(context);
-        this.sharedPref = context.getSharedPreferences("setting", Context.MODE_PRIVATE);
+        //this.sharedPref = context.getSharedPreferences("setting", Context.MODE_PRIVATE);
     }
 
     static void init(Context context) {
@@ -43,9 +43,9 @@ public class MaterializeSharedState {
         return instance;
     }
 
-    public SharedPreferences getSharedPreferences() {
-        return sharedPref;
-    }
+    //public SharedPreferences getSharedPreferences() {
+    //    return sharedPref;
+    //}
 
     public String getLauncher() {
         return launcher;

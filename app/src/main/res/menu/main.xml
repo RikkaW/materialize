@@ -26,9 +26,8 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/save"
-        android:title="@string/save_file"
-        android:checkable="true" />
+        android:id="@+id/settings"
+        android:title="@string/settings" />
 
     <item
         android:id="@+id/about"

@@ -25,6 +25,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
 import android.view.View;
 import android.widget.Toast;
@@ -73,9 +74,9 @@ public class AdjustActivity extends RxAppCompatActivity {
 
         binding.setAdjust(adjustment);
 
-        SharedPreferences sharedPref = MaterializeSharedState.getInstance().getSharedPreferences(); //PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (!sharedPref.getBoolean("save_file", false)) {
+        if (!sharedPref.getBoolean("pef_save_file", false)) {
             binding.ok.setText(R.string.adjust_ok);
             binding.tableRowEdit.setVisibility(View.GONE);
         }
@@ -86,13 +87,22 @@ public class AdjustActivity extends RxAppCompatActivity {
 
         ActivityInfo activityInfo = getIntent().getParcelableExtra("activity");
 
-        String packageName = activityInfo.packageName;
-        String[] packageNameArray = packageName.split("\\.");
-
-        if (packageNameArray.length > 1)
-            binding.editText.setText(packageNameArray[packageNameArray.length - 1]);
+        if (sharedPref.getBoolean("pef_save_file_name", false)) {
+            binding.tableRowEdit.setVisibility(View.GONE);
+        }
         else
-            binding.editText.setText(packageNameArray[packageNameArray.length]);
+        {
+            String packageName = activityInfo.packageName;
+            String[] packageNameArray = packageName.split("\\.");
+
+            if (packageNameArray.length > 1)
+                binding.editText.setText(packageNameArray[packageNameArray.length - 1]);
+            else
+                binding.editText.setText(packageNameArray[packageNameArray.length]);
+
+            binding.tableRowEdit.setVisibility(View.VISIBLE);
+        }
+
 
         binding.setTransparency(new TransparencyDrawable(
                 getResources(), R.dimen.transparency_grid_size));
@@ -133,19 +143,27 @@ public class AdjustActivity extends RxAppCompatActivity {
                 .compose(bindToLifecycle())
                 .subscribe(result -> {
 
-                    if (!sharedPref.getBoolean("save_file", false))
+
+                    if (!sharedPref.getBoolean("pef_save_file", false))
                     {
                         LauncherUtil.installShortcut(this,
                                 binding.getApp().getIntent(), binding.getApp().label, result);
 
                         Toast.makeText(this, R.string.done, Toast.LENGTH_SHORT).show();
                     }
-                    else
-                    {
-                        String toast = LauncherUtil.saveIconFile(binding.editText.getText().toString(), binding.getApp().component, result);
+                    else {
 
-                        if (!toast.equals(""))
+                        String folder = sharedPref.getString("pef_save_loc", "/icons");
+
+                        String toast = LauncherUtil.saveIconFile(folder, binding.editText.getText().toString(), result);
+
+                        if (!toast.equals("")) {
+                            if (sharedPref.getBoolean("pef_save_txt", false)) {
+                                LauncherUtil.saveComponentName(folder, binding.getApp().component);
+                            }
+
                             Toast.makeText(this, String.format(getString(R.string.done_save_file), toast), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     setResult(RESULT_OK);
