@@ -27,8 +27,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
@@ -86,14 +84,15 @@ public class AdjustActivity extends RxAppCompatActivity {
             binding.tableRowEdit.setVisibility(View.VISIBLE);
         }
 
-        // binding.getApp() = null here
-        /*String packageName = binding.getApp().packageName;
+        ActivityInfo activityInfo = getIntent().getParcelableExtra("activity");
+
+        String packageName = activityInfo.packageName;
         String[] packageNameArray = packageName.split("\\.");
 
         if (packageNameArray.length > 1)
             binding.editText.setText(packageNameArray[packageNameArray.length - 1]);
         else
-            binding.editText.setText(packageNameArray[packageNameArray.length]);*/
+            binding.editText.setText(packageNameArray[packageNameArray.length]);
 
         binding.setTransparency(new TransparencyDrawable(
                 getResources(), R.dimen.transparency_grid_size));
