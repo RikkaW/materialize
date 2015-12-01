@@ -18,7 +18,6 @@
 
 package ooo.oxo.apps.materialize;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
@@ -26,14 +25,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.IdRes;
-import android.widget.Button;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-//import com.umeng.analytics.MobclickAgent;
 
 import java.util.HashMap;
 
@@ -72,17 +71,29 @@ public class AdjustActivity extends RxAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         binding = DataBindingUtil.setContentView(this, R.layout.adjust_activity);
 
         binding.setAdjust(adjustment);
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPref = MaterializeSharedState.getInstance().getSharedPreferences(); //PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (!sharedPref.getBoolean("save_file", false))
+        if (!sharedPref.getBoolean("save_file", false)) {
             binding.ok.setText(R.string.adjust_ok);
-        else
+            binding.tableRowEdit.setVisibility(View.GONE);
+        }
+        else {
             binding.ok.setText(R.string.adjust_save_file);
+            binding.tableRowEdit.setVisibility(View.VISIBLE);
+        }
+
+        // binding.getApp() = null here
+        /*String packageName = binding.getApp().packageName;
+        String[] packageNameArray = packageName.split("\\.");
+
+        if (packageNameArray.length > 1)
+            binding.editText.setText(packageNameArray[packageNameArray.length - 1]);
+        else
+            binding.editText.setText(packageNameArray[packageNameArray.length]);*/
 
         binding.setTransparency(new TransparencyDrawable(
                 getResources(), R.dimen.transparency_grid_size));
@@ -102,6 +113,7 @@ public class AdjustActivity extends RxAppCompatActivity {
                     setResult(RESULT_CANCELED);
                     supportFinishAfterTransition();
                 });
+
 
         int size = SUPPORT_MIPMAP ? LAUNCHER_SIZE_MIPMAP
                 : getResources().getDimensionPixelSize(R.dimen.launcher_size);
@@ -131,26 +143,15 @@ public class AdjustActivity extends RxAppCompatActivity {
                     }
                     else
                     {
-                        LauncherUtil.saveIconFile(this, binding.getApp().label, binding.getApp().component, result);
-                    }
+                        String toast = LauncherUtil.saveIconFile(binding.editText.getText().toString(), binding.getApp().component, result);
 
-                    //MobclickAgent.onEvent(this, "compose", makeEvent());
+                        if (!toast.equals(""))
+                            Toast.makeText(this, String.format(getString(R.string.done_save_file), toast), Toast.LENGTH_SHORT).show();
+                    }
 
                     setResult(RESULT_OK);
                     supportFinishAfterTransition();
                 });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //MobclickAgent.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //MobclickAgent.onPause(this);
     }
 
     private HashMap<String, String> makeEvent() {
@@ -170,5 +171,4 @@ public class AdjustActivity extends RxAppCompatActivity {
                 return null;
         }
     }
-
 }

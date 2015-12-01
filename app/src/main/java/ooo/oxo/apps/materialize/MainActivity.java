@@ -18,12 +18,10 @@
 
 package ooo.oxo.apps.materialize;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.Menu;
@@ -32,10 +30,8 @@ import android.view.MenuItem;
 import com.bumptech.glide.Glide;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-//import com.umeng.analytics.MobclickAgent;
 
 import ooo.oxo.apps.materialize.databinding.MainActivityBinding;
-//import ooo.oxo.apps.materialize.util.UpdateUtil;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -90,8 +86,6 @@ public class MainActivity extends RxAppCompatActivity
         loading.compose(bindToLifecycle())
                 .doOnCompleted(() -> binding.apps.smoothScrollToPosition(0))
                 .subscribe(apps.data::addWithIndex);
-
-        //UpdateUtil.checkForUpdateAndPrompt(this);
     }
 
     @Override
@@ -107,24 +101,11 @@ public class MainActivity extends RxAppCompatActivity
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
-    /*@Override
-    protected void onResume() {
-        super.onResume();
-        //MobclickAgent.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //MobclickAgent.onPause(this);
-    }*/
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPref = MaterializeSharedState.getInstance().getSharedPreferences();
 
         menu.findItem(R.id.save).setChecked(sharedPref.getBoolean("save_file", false));
 
@@ -141,7 +122,7 @@ public class MainActivity extends RxAppCompatActivity
                 boolean checked = !item.isChecked();
                 item.setChecked(checked);
 
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences sharedPref = MaterializeSharedState.getInstance().getSharedPreferences();
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("save_file", checked);
                 editor.commit();

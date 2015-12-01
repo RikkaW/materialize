@@ -57,6 +57,8 @@ public class AppInfo {
 
     public Pinyin labelPinyin;
 
+    public String packageName;
+
     public Resources res;
 
     public int iconResId;
@@ -85,6 +87,7 @@ public class AppInfo {
     public boolean resolve(PackageManager packageManager) {
         component = new ComponentName(activityInfo.packageName, activityInfo.name);
 
+        packageName = activityInfo.packageName;
         label = activityInfo.loadLabel(packageManager).toString();
         labelPinyin = Pinyin.from(label);
 

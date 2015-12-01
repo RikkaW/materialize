@@ -168,7 +168,7 @@
 
                 </TableRow>
 
-                <TableRow android:layout_marginBottom="16dp">
+                <TableRow>
 
                     <TextView
                         android:layout_marginBottom="16dp"
@@ -207,6 +207,29 @@
                             android:text="@string/color_gradient" />
 
                     </RadioGroup>
+
+                </TableRow>
+
+                <TableRow android:id="@+id/tableRowEdit"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    >
+
+                    <TextView
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="0dp"
+                        android:text="@string/adjust_label_filename"
+                        android:layout_marginBottom="16dp" />
+
+                    <EditText
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText"
+                        android:layout_column="1"
+                        android:textSize="14sp" />
 
                 </TableRow>
 

@@ -38,6 +38,7 @@
     <string name="adjust_label_shape">Shape</string>
     <string name="adjust_label_padding">Padding</string>
     <string name="adjust_label_color">Color</string>
+    <string name="adjust_label_filename">File Name</string>
 
     <string name="shape_square">Square</string>
     <string name="shape_round">Round</string>

@@ -18,7 +18,6 @@
 
 package ooo.oxo.apps.materialize.util;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -26,22 +25,15 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-
-import ooo.oxo.apps.materialize.R;
 
 public class LauncherUtil {
-    public static void saveIconFile(Activity act, String label, ComponentName component, Bitmap icon) {
+    public static String saveIconFile(String name, ComponentName component, Bitmap icon) {
+        String result = "";
 
         FileOutputStream fileOutputStream = null;
 
@@ -54,8 +46,7 @@ public class LauncherUtil {
             if (!filePath.exists())
                 filePath.mkdir();
 
-
-            path += label + ".png";
+            path += name + ".png";
 
             File file = new File(path);
 
@@ -67,15 +58,12 @@ public class LauncherUtil {
             fileOutputStream = new FileOutputStream(file);
             icon.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
 
-            Toast.makeText(act, String.format(act.getString(R.string.done_save_file), path), Toast.LENGTH_SHORT).show();
+            saveComponentName(component);
 
-
-            saveComponentName(act, component);
+            result = path;
 
         } catch (IOException e) {
             e.printStackTrace();
-
-            Toast.makeText(act,e.toString(), Toast.LENGTH_SHORT).show();
         } finally {
             try {
                 if (fileOutputStream != null)
@@ -88,9 +76,11 @@ public class LauncherUtil {
             }
 
         }
+
+        return result;
     }
 
-    public static void saveComponentName(Activity act, ComponentName component) {
+    public static void saveComponentName(ComponentName component) {
         String path = Environment.getExternalStorageDirectory().toString();
         path += "/icons/appfilter.txt";
 
@@ -102,7 +92,7 @@ public class LauncherUtil {
         {
             e.printStackTrace();
 
-            Toast.makeText(act,e.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(act,e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

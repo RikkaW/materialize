@@ -19,6 +19,7 @@
 package ooo.oxo.apps.materialize;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import ooo.oxo.apps.materialize.util.LauncherUtil;
 
@@ -27,9 +28,11 @@ public class MaterializeSharedState {
     private static MaterializeSharedState instance;
 
     private final String launcher;
+    private final SharedPreferences sharedPref;
 
     private MaterializeSharedState(Context context) {
         this.launcher = LauncherUtil.resolveLauncherApp(context);
+        this.sharedPref = context.getSharedPreferences("setting", Context.MODE_PRIVATE);
     }
 
     static void init(Context context) {
@@ -38,6 +41,10 @@ public class MaterializeSharedState {
 
     public static MaterializeSharedState getInstance() {
         return instance;
+    }
+
+    public SharedPreferences getSharedPreferences() {
+        return sharedPref;
     }
 
     public String getLauncher() {
