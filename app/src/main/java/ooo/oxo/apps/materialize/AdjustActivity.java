@@ -154,7 +154,6 @@ public class AdjustActivity extends RxAppCompatActivity {
                         Toast.makeText(this, R.string.done, Toast.LENGTH_SHORT).show();
                     }
                     else {
-
                         String folder = sharedPref.getString("pef_save_loc", "/icons");
                         String fileName = binding.editText.getText().toString();
 

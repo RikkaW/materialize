@@ -18,13 +18,17 @@
 
 package ooo.oxo.apps.materialize;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -130,6 +134,19 @@ public class MainActivity extends RxAppCompatActivity
     public void onBackPressed() {
         if (!searchPanelController.onBackPressed()) {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("pef_save_file", false);
+            editor.apply();
         }
     }
 }

@@ -18,7 +18,7 @@
 
 <resources>
 
-    <string name="app_name">Materialize-mod</string>
+    <string name="app_name" translatable="false">Materialize-mod</string>
     <string name="app_name_debug" translatable="false">Materialize-mod (debug)</string>
 
     <string name="search">Search</string>
@@ -62,10 +62,11 @@
     <string name="settings_save_file_name_summary_on">App name will be used as file name</string>
     <string name="settings_save_file_name_summary_off">Last part of package name will be used as file name</string>
     <string name="settings_save_location">Save location</string>
-    <string name="settings_save_txt">Generate info icon pack need</string>
+    <string name="settings_save_txt">Generate info that icon pack need</string>
     <string name="settings_save_txt_summary">Save to appfilter.txt</string>
     <string name="settings_clear">Clear</string>
     <string name="settings_clear_summary">Clear saved content</string>
     <string name="save_file">Save icon</string>
+    <string name="write_file_denied">You denied storage permissions request.</string>
 
 </resources>

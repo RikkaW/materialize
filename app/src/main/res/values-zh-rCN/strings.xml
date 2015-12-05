@@ -18,8 +18,6 @@
 
 <resources>
 
-    <string name="app_name">靓晒-mod</string>
-
     <string name="search">搜索</string>
     <string name="search_hint">搜索应用…</string>
 
@@ -27,7 +25,7 @@
     <string name="about">关于</string>
 
     <string name="version" formatted="false">版本 %s (%s)</string>
-    <string name="fork_me_on_github">访问项目 靓晒 在 GitHub 上的源代码</string>
+    <string name="fork_me_on_github">访问项目 Materialize 在 GitHub 上的源代码</string>
     <string name="libraries_used">本项目用到了下列开源库</string>
 
     <string name="update_available">有新版本 %s 了</string>
@@ -62,9 +60,10 @@
     <string name="settings_save_file_name_summary_on">应用名称将被作为文件名</string>
     <string name="settings_save_file_name_summary_off">包名的最后一部分将被作为文件名</string>
     <string name="settings_save_location">保存位置</string>
-    <string name="settings_save_txt">生成图标需要的内容</string>
+    <string name="settings_save_txt">生成图标包需要的内容</string>
     <string name="settings_save_txt_summary">将被保存至 appfilter.txt</string>
     <string name="settings_clear">清空</string>
     <string name="settings_clear_summary">清空保存的内容</string>
+    <string name="write_file_denied">存储权限申请被拒绝</string>
 
 </resources>
